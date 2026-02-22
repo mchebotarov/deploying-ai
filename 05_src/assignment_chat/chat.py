@@ -1,6 +1,7 @@
 import gradio as gr
 from flightAPIService import get_flight_info
 from aviationSemanticService import query_aviation
+from weatherService import get_weather
 
 def chat_handler(message, history):
     # Detect which service to use based on message content
@@ -11,15 +12,13 @@ def chat_handler(message, history):
         return get_flight_info(message)
     
     # Use Aviation Semantic Service if user asks for aviation, information, or research
-    if "search" in message_lower or "find" in message_lower or "aviation" in message_lower or "information" in message_lower:
+    if "find" in message_lower or "aviation" in message_lower or "information" in message_lower:
         return query_aviation(message, top_n=3)
     
-    # Service #3
-    ##
-    ##
-    ##
-    ##
-    
+    # Use weather Service if user asks for weather
+    if "weather" in message_lower:
+        return get_weather(message)
+
     # Default fallback - use aviation semantic search
     return query_aviation(message, top_n=3)
 
