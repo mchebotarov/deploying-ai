@@ -63,9 +63,10 @@ def get_weather_api(location):
         return f"Error retrieving weather information: {str(e)}"
 
 
-def get_weather(query):
+def get_weather(query, TONE):
 
     input_list = [
+        {"role": "system", "content": TONE},
         {"role": "user", "content": query}
     ]
 

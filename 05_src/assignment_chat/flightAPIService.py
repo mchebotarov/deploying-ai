@@ -5,7 +5,7 @@ from openai import OpenAI
 
 load_dotenv()
 
-def get_flight_info(query: str = "What flights are currently in the air?") -> str:
+def get_flight_info(query: str = "What flights are currently in the air?", TONE: str = "") -> str:
     try:
         params = {
             'access_key': os.getenv('AVIATIONSTACK_API_KEY')
@@ -33,7 +33,7 @@ def get_flight_info(query: str = "What flights are currently in the air?") -> st
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "Transform flight information into a natural, conversational and engaging summary."},
+                {"role": "system", "content": "Transform flight information into a natural, conversational and engaging summary. {TONE}"},
                 {"role": "user", "content": f"{flights_text}\n\nUser question: {query}"}
             ]
         )

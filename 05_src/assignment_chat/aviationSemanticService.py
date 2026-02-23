@@ -9,7 +9,7 @@ load_dotenv()
 CHROMA_PATH = "./db"  
 COLLECTION_NAME = "aviation"
 
-def query_aviation(query: str, top_n: int = 3) -> str:
+def query_aviation(query: str, top_n: int = 3, TONE: str = "") -> str:
 
     try:
         # Connect ChromaDB
@@ -46,7 +46,7 @@ def query_aviation(query: str, top_n: int = 3) -> str:
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "You are an aviation expert. Answer questions based on the provided context. Be concise and informative."},
+                {"role": "system", "content": f"You are an aviation expert. Answer questions based on the provided context. Be concise and informative. {TONE}"},
                 {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {query}\n\nAnswer based on the context above:"}
             ],
             temperature=0.7,
