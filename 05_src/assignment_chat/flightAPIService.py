@@ -33,7 +33,7 @@ def get_flight_info(query: str = "What flights are currently in the air?", TONE:
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "Transform flight information into a natural, conversational and engaging summary. {TONE}"},
+                {"role": "system", "content": f"Transform flight information into a natural, conversational and engaging summary. {TONE}"},
                 {"role": "user", "content": f"{flights_text}\n\nUser question: {query}"}
             ]
         )
