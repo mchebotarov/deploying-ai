@@ -46,15 +46,15 @@ def query_aviation(query: str, top_n: int = 3, TONE: str = "") -> str:
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": f"You are an aviation expert. Answer questions based on the provided context. Be concise and informative. {TONE}"},
+                {"role": "system", "content": TONE},
                 {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {query}\n\nAnswer based on the context above:"}
             ],
             temperature=0.7,
-            max_tokens=1000
+            max_tokens=1000  # Limiting to 1000 tokens to ensure concise answers
         )
         
         return response.choices[0].message.content
         
     except Exception as e:
-        return f"Error: Cannot find aviation information"
+        return f"Error: Cannot find aviation information {e}"
 

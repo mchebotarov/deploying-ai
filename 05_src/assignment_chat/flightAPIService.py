@@ -41,4 +41,4 @@ def get_flight_info(query: str = "What flights are currently in the air?", TONE:
         return response.choices[0].message.content
         
     except Exception as e:
-        return f"Error retrieving flight information: {str(e)}"
+        return f"Error retrieving flight information"

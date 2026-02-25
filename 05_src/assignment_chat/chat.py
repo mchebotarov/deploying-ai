@@ -8,8 +8,6 @@ from langchain_core.messages.utils import trim_messages, count_tokens_approximat
 
 
 TONE = "You are an aviation expert.  Answer questions based on the provided context. Be concise and informative.  Speak like a pilot or aviation engineer would, using natural language but including technical details when relevant.  If the question is about flight mechanics, aerodynamics, aircraft systems, airline economics, safety, or future aviation trends, provide a clear and engaging explanation.  Use examples and analogies when helpful.  Always maintain an expert yet approachable tone."
-
-# Memory management: Keep context under token limit
 MAX_TOKENS = 2000  # Max tokens for conversation history
 
 
@@ -104,8 +102,6 @@ def chat_handler(message, history):
 
     # Apply memory management with token-based trimming
     managed_history = manage_memory(history)
-    
-    print("Managed History:", managed_history)
 
     # Detect which service to use based on message content
     message_lower = message.lower()
@@ -144,11 +140,13 @@ gr.ChatInterface(
         "- Aircraft systems engineering\n"
         "- Safety & accident investigation\n"
         "- Future aviation & sustainability\n\n"
-        "Tip: Ask 'compare', 'explain', 'trade-offs', or 'what are the risks/mitigations' for best results."
+        "- Current weather conditions at any location\n"
+        "\n\n"
+        "To ask about live flight information, include the word 'flight' in your question. For general aviation information or research, include words like 'aviation', 'information', 'research', or 'explain'. For weather-related questions, include the word 'weather'.\n\n"
     ),
     examples=[
         "What flights are in the air?",
         "Explain induced drag vs parasitic drag, and how winglets change the trade-off.",
-       "How do aircraft electrical buses and redundancy typically work, and what happens after a generator loss?"
+        "What's the weather like in Toronto?"
     ]
 ).launch()
