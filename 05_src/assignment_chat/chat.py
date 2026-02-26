@@ -87,7 +87,7 @@ def check_guardrails(message):
     return (False, None)
 
 
-def chat_handler(message, history):
+def chat_handler(message: str, history: list[dict]) -> str:
     
     # Check guardrails
     is_violation, violation_response = check_guardrails(message)
