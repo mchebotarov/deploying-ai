@@ -11,7 +11,7 @@ client = OpenAI(base_url='https://k7uffyg03f.execute-api.us-east-1.amazonaws.com
                 api_key='any value',
                 default_headers={"x-api-key": os.getenv('API_GATEWAY_KEY')})
 
-# 1. Define a list of callable tools for the model
+# 1. Define tools for the model
 tools = [
     {
         "type": "function",
@@ -55,7 +55,7 @@ def get_weather(query, TONE):
         {"role": "user", "content": query}
     ]
 
-    # 2. Prompt the model with tools defined
+    # Prompt the model with tools defined
     response = client.responses.create(
         model="gpt-4o",
         tools=tools,
@@ -68,11 +68,11 @@ def get_weather(query, TONE):
     for item in response.output:
         if item.type == "function_call":
             if item.name == "get_weather_api":
-                # 3. Execute the function logic for get_weather_api
+                # Execute the function logic for get_weather_api
                 args = json.loads(item.arguments)
                 weather = get_weather_api(args['location'])  # Extract location string from dict
                 
-                # 4. Provide function call results to the model
+                # Provide function call results to the model
                 input_list.append({
                     "type": "function_call_output",
                     "call_id": item.call_id,
@@ -81,6 +81,7 @@ def get_weather(query, TONE):
                     })
                 })
 
+    # Prompt the model again with function output to generate final response
     response = client.responses.create(
         model="gpt-4o",
         instructions=system_prompt,

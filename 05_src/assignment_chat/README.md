@@ -157,6 +157,7 @@ WEATHERSTACK_API_KEY=your_weatherstack_key_here
 
 
 ### Running the Application
+**Make sure the working directory that you run from is `05_src/assignment_chat`**
 ```bash
 cd 05_src/assignment_chat
 python chat.py
