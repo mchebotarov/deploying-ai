@@ -5,7 +5,7 @@ An aviation chatbot that provides expert information about aviation topics throu
 
 ## Services
 
-### Service 1: Live Flight Information (API Service)
+### Service 1: Live Flight Information (API Service) (`flightAPIService.py`)
 - **API Used:** [Aviationstack API](https://aviationstack.com/)
 - **Functionality:** Retrieves real-time flight data and transforms structured API responses into natural, conversational summaries
 - **Trigger Keywords:** "flight"
@@ -14,7 +14,7 @@ An aviation chatbot that provides expert information about aviation topics throu
   - Fetches current flight data from aviationstack API
   - Limits results to top 10 flights for readability
 
-### Service 2: Aviation Knowledge Base (Semantic Search)
+### Service 2: Aviation Knowledge Base (Semantic Search) (`aviationSemanticService.py`)
 - **Technology:** ChromaDB with persistent file storage
 - **Dataset:** 5 custom aviation text documents (created by ChatGPT and stored in the docs folder ) covering:
   1. Aerodynamics & Flight Mechanics
@@ -31,7 +31,7 @@ An aviation chatbot that provides expert information about aviation topics throu
   - Retrieves top 3 most relevant chunks for each query
   - RAG pattern: semantic search → context retrieval → LLM-generated response
 
-### Service 3: Weather Information (Function Calling)
+### Service 3: Weather Information (Function Calling) (`weatherService.py`)
 - **Technology:** OpenAI Function Calling with Weatherstack API
 - **API Used:** [Weatherstack API](https://weatherstack.com/)
 - **Trigger Keywords:** "weather"
@@ -39,6 +39,13 @@ An aviation chatbot that provides expert information about aviation topics throu
 - **Implementation Details:**
   - LLM determines when to invoke weather function based on user query
   - Fetches current weather data and presents in natural language
+
+### Service 4: Calling OpenAI LLM (`LLMService.py`)
+- **Technology:** OpenAI 
+- **Trigger Keywords:** None, default behaviour
+- **Example:** "How many calories are in a burger?"
+- **Implementation Details:**
+  - Calls OpenAI LLM for generated response
 
 ## User Interface
 
