@@ -22,4 +22,4 @@ def get_LLM_Response(messages: str, TONE: str = "") -> str:
         return response.choices[0].message.content
         
     except Exception as e:
-        return f"Error accessing LLM: {str(e)}"
+        return f"Error accessing LLM Service"
